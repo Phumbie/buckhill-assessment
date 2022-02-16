@@ -1,8 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <p>hello</p>
-    </v-app-bar>
+    <Navbar />
     <v-main>
       <v-container> Hello World </v-container>
     </v-main>
@@ -10,11 +8,21 @@
 </template>
 
 <script>
+  import Navbar from "@/layouts/Navbar";
   export default {
     name: "App",
-
+    components: {
+      Navbar,
+    },
     data: () => ({
       //
     }),
   };
 </script>
+<style scoped>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+</style>
