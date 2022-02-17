@@ -1,5 +1,5 @@
 <template>
-  <footer class="light-green pa-8 footer-container">
+  <footer class="light-green pa-10 footer-container">
     <v-container>
       <v-row>
         <v-col>
