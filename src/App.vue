@@ -2,7 +2,9 @@
   <v-app>
     <Navbar />
     <v-main>
-      <v-container> Hello World </v-container>
+      <component :is="layout">
+        <router-view />
+      </component>
     </v-main>
   </v-app>
 </template>
@@ -14,15 +16,21 @@
     components: {
       Navbar,
     },
-    data: () => ({
-      //
-    }),
+    // data: () => ({
+    //   //
+    // }),
+    computed: {
+      layout() {
+        return (this.$route.meta.layout || default_layout) + "-layout";
+      },
+    },
   };
 </script>
-<style scoped>
+<style>
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: roboto !important;
   }
 </style>
