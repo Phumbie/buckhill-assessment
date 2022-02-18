@@ -1,6 +1,6 @@
 <template>
   <v-container class="mb-12">
-    <Header :promotions="allPromotions" />
+    <Header :promotions="allPromotions" :loading="headerLoading" />
     <ProductContainer class="mt-13" :products="randomProducts" />
     <Blogs class="mt-13" />
     <ProductContainer class="mt-13" :products="randomProducts" />
@@ -22,6 +22,7 @@
     },
     data: () => ({
       randomProducts: [],
+      headerLoading: false,
     }),
     computed: {
       ...mapState({
@@ -29,7 +30,7 @@
       }),
     },
     mounted() {
-      this.getPromotions();
+      this.getAllpromotions();
       this.getBlogs();
       // this is the onlt categoory id this is working
       this.getRandomProducts({
@@ -46,6 +47,19 @@
           this.randomProducts = data.data;
           console.log(ths);
         });
+      },
+      getAllpromotions() {
+        this.headerLoading = true;
+        // console.log(this.headerLoading);
+
+        this.getPromotions()
+          .then(() => {
+            this.headerLoading = false;
+            // console.log(this.headerLoading);
+          })
+          .catch(() => {
+            this.headerLoading = false;
+          });
       },
     },
   };
