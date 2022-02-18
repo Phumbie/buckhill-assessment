@@ -5,7 +5,6 @@ export default {
     return new Promise((resolve, reject) => {
       GET_PROMOTIONS()
         .then(({ data }) => {
-          console.log(data.data);
           commit("GET_PROMOTIONS", data.data);
           resolve(data);
         })

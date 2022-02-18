@@ -19,13 +19,7 @@
       hide-delimiters
     >
       <v-carousel-item v-for="promotion in promotions" :key="promotion.id">
-        <!-- <v-sheet height="100%" tile> -->
-          <!-- <v-row class="fill-height" align="center" justify="center">
-            div.
-          </v-row> -->
-          <!-- <div>hello</div> -->
-          <SinglePromotion :promotionData="promotion" />
-        <!-- </v-sheet> -->
+        <SinglePromotion :promotionData="promotion" />
       </v-carousel-item>
     </v-carousel>
   </div>
@@ -47,18 +41,12 @@
         default: false,
       },
     },
-    watch: {
-      loading(value) {
-        console.log(value);
-      },
-    },
     data: () => ({
       model: 0,
-      colors: ["primary", "secondary", "yellow darken-2", "red", "orange"],
     }),
-    mounted() {
-      console.log(this.promotions, "promotions");
-    },
+    // mounted() {
+    //   console.log(this.promotions, "promotions");
+    // },
   };
 </script>
 <style>
