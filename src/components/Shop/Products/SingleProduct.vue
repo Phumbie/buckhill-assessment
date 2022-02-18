@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-cell">
-    <div class="image">
+    <div class="image pa-7">
       <v-img :src="productImage"></v-img>
     </div>
     <p class="title">{{ product.brand.title }}</p>
@@ -29,13 +29,13 @@
       0 1px 5px 0 rgb(0 0 0 / 12%);
   }
   .carousel-cell {
-    height: 25rem;
+    height: 28rem;
     border-radius: 10px;
     padding: 2rem 3rem;
     width: 20rem;
-
+    transition: all 0.5s linear;
     margin-right: 10px;
-
+overflow: auto;
     p {
       margin: 0;
     }

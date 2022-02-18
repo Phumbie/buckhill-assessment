@@ -7,7 +7,11 @@
       :loading="firstProductLoading"
     />
     <Blogs class="mt-13" />
-    <ProductContainer class="mt-13" :products="randomProducts" />
+    <ProductContainer
+      class="mt-13"
+      :products="randomProducts"
+      :loading="firstProductLoading"
+    />
     <Blogs class="mt-13" direction="reverse" />
   </v-container>
 </template>
