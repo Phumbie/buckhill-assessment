@@ -32,7 +32,7 @@
     data: () => ({
       flickityOptions: {
         initialIndex: 1,
-        prevNextButtons: false,
+        // prevNextButtons: false,
         pageDots: false,
         cellAlign: "left",
       },

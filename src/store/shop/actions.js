@@ -17,7 +17,7 @@ export default {
     return new Promise((resolve, reject) => {
       GET_BLOGS()
         .then(({ data }) => {
-          console.log(data);
+          commit("GET_BLOGS", data.data);
           resolve(data);
         })
         .catch((err) => {

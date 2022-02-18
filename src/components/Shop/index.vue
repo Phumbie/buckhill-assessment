@@ -6,13 +6,18 @@
       :products="randomProducts"
       :loading="firstProductLoading"
     />
-    <Blogs class="mt-13" />
+    <Blogs class="mt-13" :blog="allBlogs[0]" v-if="allBlogs.length > 0" />
     <ProductContainer
       class="mt-13"
       :products="randomProducts"
       :loading="firstProductLoading"
     />
-    <Blogs class="mt-13" direction="reverse" />
+    <Blogs
+      class="mt-13"
+      direction="reverse"
+      :blog="allBlogs[1]"
+      v-if="allBlogs.length > 0"
+    />
   </v-container>
 </template>
 <script>
@@ -36,6 +41,7 @@
     computed: {
       ...mapState({
         allPromotions: (state) => state.shop.allPromotions,
+        allBlogs: (state) => state.shop.getBlogs,
       }),
     },
     beforeMount() {
@@ -53,13 +59,10 @@
       ...mapActions("shop", ["getPromotions", "getBlogs"]),
       getRandomProducts(params) {
         this.firstProductLoading = true;
-        console.log(this.firstProductLoading);
         GET_PRODUCTS(params)
           .then(({ data }) => {
-            console.log(this.firstProductLoading, "loading");
             this.randomProducts = data.data.slice(5);
             this.firstProductLoading = false;
-            console.log(this.randomProducts, "products");
           })
           .catch(() => {
             this.firstProductLoading = false;
