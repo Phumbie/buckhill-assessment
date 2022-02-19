@@ -55,19 +55,35 @@
           </svg>
           <h5 class="text-h6 mt-4">Log In</h5>
         </div>
-        <v-form class="mt-3">
+        <v-form class="mt-3" @submit.prevent="login()">
           <v-text-field
             outlined
             dense
             label="Email address *"
             solo
+            type="email"
+            v-model="user.email"
           ></v-text-field>
-          <v-text-field outlined dense label="Pasword *" solo></v-text-field>
+          <v-text-field
+            outlined
+            dense
+            label="Pasword *"
+            solo
+            type="password"
+            v-model="user.password"
+          ></v-text-field>
 
           <!-- <v-card-actions> -->
           <v-spacer></v-spacer>
 
-          <v-btn color="primary" width="100%" depressed>LOG IN</v-btn>
+          <v-btn
+            color="primary"
+            width="100%"
+            depressed
+            :loading="loading"
+            @click="login"
+            >LOG IN</v-btn
+          >
         </v-form>
 
         <div class="mt-6 px-4">
@@ -82,6 +98,7 @@
   </v-app-bar>
 </template>
 <script>
+  import { mapActions } from "vuex";
   import { mdiCart } from "@mdi/js";
   export default {
     data: () => ({
@@ -89,7 +106,31 @@
         mdiCart,
       },
       dialog: false,
+      loading: false,
+      user: {
+        email: "",
+        password: "",
+      },
     }),
+    watch: {
+      "user.email"(value) {
+        console.log(value);
+      },
+    },
+    methods: {
+      ...mapActions("admin", ["adminLogin"]),
+      login() {
+        this.loading = true;
+        this.adminLogin(this.user)
+          .then(() => {
+            this.loading = false;
+            this.dialog = false;
+          })
+          .catch(() => {
+            this.loading = false;
+          });
+      },
+    },
   };
 </script>
 <style lang="scss" scoped>
