@@ -52,10 +52,10 @@
 <style>
   .v-input__control > .v-input__slot {
     box-shadow: none !important;
-    border: 1px solid #4ec690;
-    color: #4ec690;
+    /* border: 1px solid #4ec690;
+    color: #4ec690; */
   }
-  .v-label {
+  /* .v-label {
     color: #4ec690 !important;
-  }
+  } */
 </style>

@@ -1,10 +1,19 @@
 <template>
   <div class="carousel-cell">
     <div class="image pa-7">
-      <v-img :src="productImage"></v-img>
+      <v-img :src="productImage">
+        <template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row>
+        </template>
+      </v-img>
     </div>
     <p class="title">{{ product.brand.title }}</p>
-    <p class="description">{{ product.title | truncate(25, "...")  }}</p>
+    <p class="description">{{ product.title | truncate(25, "...") }}</p>
     <p class="title">{{ product.price }} kn</p>
   </div>
 </template>
@@ -35,7 +44,7 @@
     width: 20rem;
     transition: all 0.5s linear;
     margin-right: 10px;
-overflow: auto;
+    overflow: auto;
     p {
       margin: 0;
     }
