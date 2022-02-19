@@ -9,7 +9,7 @@ export default {
       ADMIN_LOGIN(payload)
         .then(({ data }) => {
           const token = data.data.token;
-          cookies.set("token", token, "2h");
+          cookies.set("token", token);
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
           router.push("/customers");

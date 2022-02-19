@@ -14,11 +14,17 @@
           {{ item.is_marketing === 0 ? "NO" : "YES" }}
         </v-chip>
       </template>
+      <template v-slot:item.created_at="{ item }">
+        <!-- <p> -->
+          {{ formatDate(item.created_at) }}
+        <!-- </p> -->
+      </template>
     </v-data-table>
   </div>
 </template>
 <script>
   import { mapActions, mapState } from "vuex";
+  import dayjs from "dayjs";
   export default {
     data: () => ({
       headers: [
@@ -57,6 +63,9 @@
       },
       getColor(item) {
         return item === 0 ? "orange" : "green";
+      },
+      formatDate(date) {
+        return dayjs(date).format("MMMM DD, YYYY");
       },
     },
   };
