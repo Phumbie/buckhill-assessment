@@ -112,11 +112,6 @@
         password: "",
       },
     }),
-    watch: {
-      "user.email"(value) {
-        console.log(value);
-      },
-    },
     methods: {
       ...mapActions("admin", ["adminLogin"]),
       login() {
