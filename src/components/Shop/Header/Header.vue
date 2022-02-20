@@ -18,31 +18,44 @@
       cycle
       hide-delimiters
     >
-      <v-carousel-item v-for="(color, i) in colors" :key="color">
-        <v-sheet :color="color" height="100%" tile>
-          <v-row class="fill-height" align="center" justify="center">
-            <div class="text-h2">Slide {{ i + 1 }}</div>
-          </v-row>
-        </v-sheet>
+      <v-carousel-item v-for="promotion in promotions" :key="promotion.id">
+        <SinglePromotion :promotionData="promotion" />
       </v-carousel-item>
     </v-carousel>
   </div>
 </template>
 <script>
+  import SinglePromotion from "./SinglePromotion.vue";
   export default {
+    components: {
+      SinglePromotion,
+    },
+    props: {
+      promotions: {
+        type: Array,
+        default: () => [],
+        required: true,
+      },
+      loading: {
+        type: Boolean,
+        default: false,
+      },
+    },
     data: () => ({
       model: 0,
-      colors: ["primary", "secondary", "yellow darken-2", "red", "orange"],
     }),
+    // mounted() {
+    //   console.log(this.promotions, "promotions");
+    // },
   };
 </script>
 <style>
   .v-input__control > .v-input__slot {
     box-shadow: none !important;
-    border: 1px solid #4ec690;
-    color: #4ec690;
+    /* border: 1px solid #4ec690;
+    color: #4ec690; */
   }
-  .v-label {
+  /* .v-label {
     color: #4ec690 !important;
-  }
+  } */
 </style>

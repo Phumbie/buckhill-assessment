@@ -10,6 +10,7 @@
 </template>
 
 <script>
+  const default_layout = "default";
   import Navbar from "@/layouts/Navbar";
   export default {
     name: "App",

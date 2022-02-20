@@ -1,10 +1,23 @@
 <template>
   <v-container class="mb-12">
-    <Header :promotions="allPromotions" />
-    <ProductContainer class="mt-13" :products="randomProducts" />
-    <Blogs class="mt-13" />
-    <ProductContainer class="mt-13" :products="randomProducts" />
-    <Blogs class="mt-13" direction="reverse" />
+    <Header :promotions="allPromotions" :loading="headerLoading" />
+    <ProductContainer
+      class="mt-13"
+      :products="randomProducts"
+      :loading="firstProductLoading"
+    />
+    <Blogs class="mt-13" :blog="allBlogs[0]" v-if="allBlogs.length > 0" />
+    <ProductContainer
+      class="mt-13"
+      :products="randomProducts"
+      :loading="firstProductLoading"
+    />
+    <Blogs
+      class="mt-13"
+      direction="reverse"
+      :blog="allBlogs[1]"
+      v-if="allBlogs.length > 0"
+    />
   </v-container>
 </template>
 <script>
@@ -22,18 +35,21 @@
     },
     data: () => ({
       randomProducts: [],
+      headerLoading: false,
+      firstProductLoading: false,
     }),
     computed: {
       ...mapState({
         allPromotions: (state) => state.shop.allPromotions,
+        allBlogs: (state) => state.shop.getBlogs,
       }),
     },
-    mounted() {
-      this.getPromotions();
+    beforeMount() {
+      this.getAllpromotions();
       this.getBlogs();
       // this is the onlt categoory id this is working
       this.getRandomProducts({
-        params: { category: "21d5d1c3-f867-31e8-8e98-3a4820089037" },
+        params: { category: "05014f1e-eb83-3452-982b-00a2bd575226" },
       });
       // this.getRandomProducts({
       //   params: { category: "67160ca3-f18c-3d9c-a063-3055891509c6" },
@@ -42,10 +58,28 @@
     methods: {
       ...mapActions("shop", ["getPromotions", "getBlogs"]),
       getRandomProducts(params) {
-        GET_PRODUCTS(params).then(({ data }) => {
-          this.randomProducts = data.data;
-          console.log(ths);
-        });
+        this.firstProductLoading = true;
+        GET_PRODUCTS(params)
+          .then(({ data }) => {
+            this.randomProducts = data.data.slice(5);
+            this.firstProductLoading = false;
+          })
+          .catch(() => {
+            this.firstProductLoading = false;
+          });
+      },
+      getAllpromotions() {
+        this.headerLoading = true;
+        // console.log(this.headerLoading);
+
+        this.getPromotions()
+          .then(() => {
+            this.headerLoading = false;
+            // console.log(this.headerLoading);
+          })
+          .catch(() => {
+            this.headerLoading = false;
+          });
       },
     },
   };

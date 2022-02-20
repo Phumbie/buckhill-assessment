@@ -1,37 +1,46 @@
 <template>
   <div>
     <h2 class="product-heading primary--text">Dry dog Food</h2>
-    <Flickity ref="flickity" :options="flickityOptions">
-      <div class="carousel-cell" v-for="i in 5" :key="i">
-        <p>hello</p>
-      </div>
+    <Flickity ref="flickity" :options="flickityOptions" v-if="!loading">
+      <SingleProduct
+        :product="product"
+        v-for="product in products"
+        :key="product.id"
+      />
     </Flickity>
   </div>
 </template>
 <script>
   import Flickity from "vue-flickity";
+  import SingleProduct from "./SingleProduct.vue";
   export default {
     components: {
       Flickity,
+      SingleProduct,
+    },
+    props: {
+      products: {
+        type: Array,
+        default: () => [],
+        required: true,
+      },
+      loading: {
+        type: Boolean,
+        default: false,
+      },
     },
     data: () => ({
       flickityOptions: {
         initialIndex: 1,
-        prevNextButtons: false,
+        // prevNextButtons: false,
         pageDots: false,
         cellAlign: "left",
       },
     }),
   };
 </script>
-<style scoped>
-  .carousel-cell {
-    height: 25rem;
-    border-radius: 16px;
-    padding: 1rem;
-    width: 20rem;
-    border: 1px solid black;
-    /* background-color: red; */
-    margin-right: 10px;
+<style>
+  .flickity-viewport {
+    height: 450px !important;
   }
 </style>

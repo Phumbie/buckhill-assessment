@@ -1,36 +1,14 @@
 <template>
   <div class="blog-container" :class="{ reverse: direction === 'reverse' }">
-    <!-- <v-row no-gutters>
-      <v-col cols="12" sm="6" md="6">
-        <v-img
-          lazy-src="@/assets/images/blog.png"
-          src="@/assets/images/blog.png"
-        ></v-img>
-      </v-col>
-      <v-col cols="6" md="6" class="d-flex align-center pl-6">
-        <div>
-          <p class="product-heading primary--text">Treat your pup</p>
-          <p></p>
-          <div class="button primary pa-2">
-            <p class="underline white--text ma-0">
-              Discover our dog treat selection
-            </p>
-          </div>
-        </div>
-      </v-col>
-    </v-row> -->
     <div class="image-container">
-      <v-img
-        lazy-src="@/assets/images/blog.png"
-        src="@/assets/images/blog.png"
-      ></v-img>
+      <v-img :lazy-src="blogImage" :src="blogImage"></v-img>
     </div>
 
     <div
       class="content-container"
       :class="{ reverse: direction === 'reverse' }"
     >
-      <p class="product-heading primary--text">Treat your pup</p>
+      <p class="product-heading primary--text">{{ blog.title }}</p>
       <p></p>
       <div class="button primary pa-2">
         <p class="underline white--text ma-0">
@@ -49,6 +27,15 @@
         default: "normal",
         required: false,
       },
+      blog: {
+        type: Object,
+        default: () => {},
+      },
+    },
+    computed: {
+      blogImage() {
+        return `${process.env.VUE_APP_BASE_URL}/file/${this.blog?.metadata?.image}`;
+      },
     },
   };
 </script>
@@ -63,10 +50,12 @@
 
     .image-container {
       width: 50%;
+      height: 25rem;
+      background-color: #f4f5f4;
     }
     .content-container {
       padding: 1rem;
-      width: 100%;
+      width: 50%;
       &.reverse {
         justify-content: flex-end;
       }
