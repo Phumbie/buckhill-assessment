@@ -37,14 +37,6 @@
         cellAlign: "left",
       },
     }),
-    watch: {
-      loading(value) {
-        console.log(value);
-      },
-    },
-    mounted() {
-      console.log(this.products, "single product");
-    },
   };
 </script>
 <style>
