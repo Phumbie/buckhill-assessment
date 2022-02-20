@@ -5,4 +5,7 @@ export default {
   SET_TOKEN(state, payload) {
     state.token = payload;
   },
+  LOGOUT(state) {
+    state.token = null;
+  },
 };

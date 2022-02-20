@@ -32,14 +32,15 @@ export default {
         });
     });
   },
-  logout() {
-    return new Promnise((resolve, reject) => {
+  logout({ commit }) {
+    return new Promise((resolve, reject) => {
       LOGOUT_ADMIN()
         .then(({ data }) => {
+          commit("LOGOUT");
           cookies.remove("token");
           delete axios.defaults.headers.common["Authorization"];
           router.push("/");
-          resolce(data);
+          resolve(data);
         })
         .catch((err) => {
           reject(err);
