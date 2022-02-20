@@ -12,9 +12,11 @@
         </template>
       </v-img>
     </div>
-    <p class="title">{{ product.brand.title }}</p>
-    <p class="description">{{ product.title | truncate(25, "...") }}</p>
-    <p class="title">{{ product.price }} kn</p>
+    <p class="title" v-if="product.brand">{{ product.brand.title }}</p>
+    <p class="description" v-if="product.title">
+      >{{ product.title | truncate(25, "...") }}
+    </p>
+    <p class="title" v-if="product.price">>{{ product.price }} kn</p>
   </div>
 </template>
 <script>

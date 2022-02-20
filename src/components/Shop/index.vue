@@ -49,7 +49,7 @@
       this.getBlogs();
       // this is the onlt categoory id this is working
       this.getRandomProducts({
-        params: { category: "04d5e920-7a9d-3ba8-a8b2-d92dcdbb40bf" },
+        params: { category: "05014f1e-eb83-3452-982b-00a2bd575226" },
       });
       // this.getRandomProducts({
       //   params: { category: "67160ca3-f18c-3d9c-a063-3055891509c6" },
