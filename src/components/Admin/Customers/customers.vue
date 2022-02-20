@@ -9,6 +9,14 @@
       class="elevation-1 mt-5"
       :loading="loading"
     >
+      <template v-slot:top>
+        <v-toolbar flat width="100%">
+          <v-toolbar-title>All Cutomers</v-toolbar-title>
+          <!-- <v-btn color="primary" depressed>ADD NEW CUSTOMER</v-btn> -->
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-spacer></v-spacer>
+        </v-toolbar>
+      </template>
       <template v-slot:item.is_marketing="{ item }">
         <v-chip dark :color="getColor(item.is_marketing)">
           {{ item.is_marketing === 0 ? "NO" : "YES" }}
