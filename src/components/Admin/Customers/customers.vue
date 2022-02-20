@@ -15,9 +15,10 @@
         </v-chip>
       </template>
       <template v-slot:item.created_at="{ item }">
-        <!-- <p> -->
-          {{ formatDate(item.created_at) }}
-        <!-- </p> -->
+        {{ formatDate(item.created_at) }}
+      </template>
+      <template v-slot:item.actions="{ item }">
+        <v-icon>mdi-dots-vertical</v-icon>
       </template>
     </v-data-table>
   </div>
@@ -37,7 +38,7 @@
         { text: "Address", value: "address" },
         { text: "Date created", value: "created_at" },
         { text: "Marketing preferences", value: "is_marketing" },
-        { text: "", value: "iron" },
+        { text: "", value: "actions" },
       ],
       loading: false,
     }),

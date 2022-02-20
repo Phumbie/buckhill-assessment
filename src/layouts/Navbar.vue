@@ -33,9 +33,20 @@
           <v-icon dark left> {{ icons.mdiCart }} </v-icon>
           Cart (0)
         </v-btn>
-        <v-btn class="ma-2" color="white" outlined @click="dialog = true">
+        <v-btn
+          class="ma-2"
+          color="white"
+          outlined
+          @click="dialog = true"
+          v-if="!isAuthenticated"
+        >
           LOGIN
         </v-btn>
+        <!-- <div class="signedIn"> -->
+        <v-btn class="ma-2" color="white" outlined v-else @click="logout">
+          LOGOUT
+        </v-btn>
+        <!-- </div> -->
       </div>
     </div>
     <v-dialog v-model="dialog" width="30%" max-width="25rem">
@@ -98,7 +109,7 @@
   </v-app-bar>
 </template>
 <script>
-  import { mapActions } from "vuex";
+  import { mapActions, mapGetters, mapState } from "vuex";
   import { mdiCart } from "@mdi/js";
   export default {
     data: () => ({
@@ -112,8 +123,11 @@
         password: "",
       },
     }),
+    computed: {
+      ...mapGetters("admin", ["isAuthenticated"]),
+    },
     methods: {
-      ...mapActions("admin", ["adminLogin"]),
+      ...mapActions("admin", ["adminLogin", "logout"]),
       login() {
         this.loading = true;
         this.adminLogin(this.user)
@@ -172,5 +186,9 @@
     color: #1976d2;
     font-size: 14px;
     cursor: pointer;
+  }
+  .signedIn {
+    display: flex;
+    align-items: center;
   }
 </style>
