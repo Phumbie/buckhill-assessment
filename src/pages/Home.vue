@@ -4,7 +4,7 @@
 <script>
   import Shop from "../components/Shop";
   export default {
-    name: "Shop",
+    name: "Store",
 
     components: {
       Shop,
