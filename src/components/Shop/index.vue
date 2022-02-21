@@ -3,13 +3,13 @@
     <Header :promotions="allPromotions" :loading="headerLoading" />
     <ProductContainer
       class="mt-13"
-      :products="randomProducts"
+      :products="firstRandom"
       :loading="firstProductLoading"
     />
     <Blogs class="mt-13" :blog="allBlogs[0]" v-if="allBlogs.length > 0" />
     <ProductContainer
       class="mt-13"
-      :products="randomProducts"
+      :products="secondRandom"
       :loading="firstProductLoading"
     />
     <Blogs
@@ -37,6 +37,8 @@
       randomProducts: [],
       headerLoading: false,
       firstProductLoading: false,
+      firstRandom: [],
+      secondRandom: [],
     }),
     computed: {
       ...mapState({
@@ -47,10 +49,8 @@
     beforeMount() {
       this.getAllpromotions();
       this.getBlogs();
-      // this is the onlt categoory id this is working
-      this.getRandomProducts({
-        params: { category: "43f085a7-35c1-3dfc-b943-68ee0a243053" },
-      });
+      // filter by category from UUID gotten from category endpoijt returns empty data; I noticed the products cominng from the products endpoint all use the same category id and instead decided to split it
+      this.getRandomProducts();
       // this.getRandomProducts({
       //   params: { category: "67160ca3-f18c-3d9c-a063-3055891509c6" },
       // });
@@ -62,6 +62,8 @@
         GET_PRODUCTS(params)
           .then(({ data }) => {
             this.randomProducts = data.data.slice(5);
+            this.firstRandom = data.data.slice(0, 5);
+            this.secondRandom = data.data.slice(5, 10);
             this.firstProductLoading = false;
           })
           .catch(() => {
