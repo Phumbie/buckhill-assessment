@@ -2,7 +2,7 @@ import axios from "axios";
 import store from "@/store";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
+  baseURL: "https://pet-shop.buckhill.com.hr/api/v1",
 });
 
 axiosInstance.interceptors.response.use(
