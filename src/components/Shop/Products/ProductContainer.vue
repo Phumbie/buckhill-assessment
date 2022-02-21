@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="product-heading primary--text">Dry dog Food</h2>
+    <h2 class="product-heading primary--text">{{ categoryName }}</h2>
     <Flickity ref="flickity" :options="flickityOptions" v-if="!loading">
       <SingleProduct
         :product="product"
@@ -37,6 +37,14 @@
         cellAlign: "left",
       },
     }),
+    // hacky
+    computed: {
+      categoryName() {
+        if (this.products.length > 0) {
+          return this.products[0]?.category?.title;
+        }
+      },
+    },
   };
 </script>
 <style>
