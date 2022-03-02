@@ -1,7 +1,10 @@
 <template>
   <div class="blog-container" :class="{ reverse: direction === 'reverse' }">
     <div class="image-container">
-      <v-img :lazy-src="blogImage" :src="blogImage"></v-img>
+      <v-img
+        :lazy-src="getImage(blog.metadata.image)"
+        :src="getImage(blog.metadata.image)"
+      ></v-img>
     </div>
 
     <div
@@ -20,7 +23,9 @@
 </template>
 
 <script>
+  import getImage from "@/mixins/getImage";
   export default {
+    mixins: [getImage],
     props: {
       direction: {
         type: String,
@@ -30,11 +35,6 @@
       blog: {
         type: Object,
         default: () => {},
-      },
-    },
-    computed: {
-      blogImage() {
-        return `${process.env.VUE_APP_BASE_URL}/file/${this.blog?.metadata?.image}`;
       },
     },
   };

@@ -17,6 +17,31 @@
           <v-spacer></v-spacer>
         </v-toolbar>
       </template>
+      <template v-slot:item.name="{ item }">
+        <tr>
+          <td class="d-block d-sm-table-cell" style="width: 300px">
+            <div class="d-flex align-center">
+              <img
+                v-if="item.avatar"
+                :src="getImage(item.avatar)"
+                class="mr-2 rounded-circle"
+                contain
+                height="44"
+                width="44"
+              />
+              <img
+                v-else
+                :src="require('@/assets/images/avatar.svg')"
+                class="mr-2 rounded-circle"
+                contain
+                height="44"
+              />
+              {{ item.first_name | capitalize }}
+              {{ item.last_name | capitalize }}
+            </div>
+          </td>
+        </tr>
+      </template>
       <template v-slot:item.is_marketing="{ item }">
         <v-chip dark :color="getColor(item.is_marketing)">
           {{ item.is_marketing === 0 ? "NO" : "YES" }}
@@ -34,12 +59,18 @@
 <script>
   import { mapActions, mapState } from "vuex";
   import dayjs from "dayjs";
+  import getImage from "@/mixins/getImage";
   export default {
+    mixins: [getImage],
     data: () => ({
       headers: [
         {
-          text: "Email",
+          text: "Name",
+          value: "name",
           align: "start",
+        },
+        {
+          text: "Email",
           value: "email",
         },
         { text: "Phone", value: "phone_number" },
@@ -86,6 +117,13 @@
     }
     .route {
       /* color:  */
+    }
+
+    .image {
+      height: 2rem;
+      width: 2rem;
+      border-radius: 50%;
+      background-color: black;
     }
   }
 </style>
