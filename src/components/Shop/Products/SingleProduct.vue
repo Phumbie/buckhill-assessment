@@ -1,7 +1,7 @@
 <template>
   <div class="carousel-cell">
     <div class="image pa-7">
-      <v-img :src="productImage">
+      <v-img :src="getImage(product.metadata.image)">
         <template v-slot:placeholder>
           <v-row class="fill-height ma-0" align="center" justify="center">
             <v-progress-circular
@@ -20,18 +20,20 @@
   </div>
 </template>
 <script>
+  import getImage from "@/mixins/getImage";
   export default {
+    mixins: [getImage],
     props: {
       product: {
         type: Object,
         default: () => {},
       },
     },
-    computed: {
-      productImage() {
-        return `${process.env.VUE_APP_BASE_URL}/file/${this.product?.metadata?.image}`;
-      },
-    },
+    // computed: {
+    //   productImage() {
+    //     return `${process.env.VUE_APP_BASE_URL}/file/${this.product?.metadata?.image}`;
+    //   },
+    // },
   };
 </script>
 <style lang="scss">
